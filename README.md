@@ -64,3 +64,5 @@ Rama utilizada para realizar mejoras en la apariencia visual del sitio web, incl
 ## Autor
 
 Roberto Ochoa Venegas
+
+Actualización visual realizada en la rama feature-mejora-estilo.

@@ -1,510 +1,125 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-<meta charset="UTF-8">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@700;800&display=swap');
-
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
-html,body{
-  width:210mm;min-height:297mm;
-  background:#111;
-  font-family:'Inter',sans-serif;
-  font-size:8.2pt;
-  color:#fff;
-  -webkit-print-color-adjust:exact;
-  print-color-adjust:exact;
-}
-
-.page{
-  width:210mm;
-  min-height:297mm;
-  background:#111;
-  display:flex;
-  flex-direction:column;
-}
-
-/* ─── HEADER ─── */
-.hdr{
-  background:#111;
-  padding:7mm 9mm 5mm;
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:0 6mm;
-  border-bottom:0.4mm solid #333;
-}
-
-.hdr-brand{
-  display:flex;
-  flex-direction:column;
-  gap:1mm;
-}
-
-.hdr-logo-row{
-  display:flex;
-  align-items:center;
-  gap:3.5mm;
-}
-
-/* LOGO placeholder — se reemplaza con <img> cuando llegue el logo real */
-.logo-placeholder{
-  width:32mm;
-  height:10mm;
-  display:flex;
-  align-items:center;
-}
-
-.logo-placeholder img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
-  filter:brightness(0) invert(1); /* logo blanco sobre negro */
-}
-
-.hdr-title{
-  font-size:6pt;
-  font-weight:400;
-  color:#555;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  margin-top:1mm;
-}
-
-.hdr-meta{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:2mm 6mm;
-  align-content:start;
-  text-align:right;
-}
-
-.meta-block{}
-
-.meta-label{
-  font-size:5.5pt;
-  font-weight:600;
-  color:#555;
-  letter-spacing:2.5px;
-  text-transform:uppercase;
-  display:block;
-  margin-bottom:0.5mm;
-}
-
-.meta-value{
-  font-size:8.5pt;
-  font-weight:600;
-  color:#fff;
-  letter-spacing:0.5px;
-}
-
-.meta-value.big{
-  font-family:'Inter Tight',sans-serif;
-  font-size:16pt;
-  font-weight:800;
-  letter-spacing:-0.5px;
-  color:#fff;
-}
-
-/* ─── QUICK STRIP ─── */
-.strip{
-  background:#1a1a1a;
-  border-bottom:0.3mm solid #222;
-  display:flex;
-  padding:0 9mm;
-}
-
-.strip-item{
-  flex:1;
-  padding:2.2mm 0;
-  border-right:0.3mm solid #2a2a2a;
-  padding-right:4mm;
-  padding-left:0;
-}
-.strip-item:not(:first-child){padding-left:4mm;}
-.strip-item:last-child{border-right:none;}
-
-.strip-label{
-  font-size:5.5pt;
-  font-weight:600;
-  color:#555;
-  letter-spacing:2.5px;
-  text-transform:uppercase;
-  display:block;
-  margin-bottom:0.5mm;
-}
-
-.strip-value{
-  font-size:8pt;
-  font-weight:600;
-  color:#ddd;
-}
-
-/* ─── BODY ─── */
-.body{
-  flex:1;
-  padding:5mm 9mm 4mm;
-  display:flex;
-  flex-direction:column;
-  gap:4mm;
-}
-
-/* ─── SECCIÓN ─── */
-.sec{}
-
-.sec-hdr{
-  font-size:6pt;
-  font-weight:700;
-  color:#555;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  border-bottom:0.3mm solid #2a2a2a;
-  padding-bottom:1.5mm;
-  margin-bottom:3mm;
-}
-
-/* Grid de campos */
-.fields{
-  display:grid;
-  gap:2mm 5mm;
-}
-.f1{grid-template-columns:1fr;}
-.f2{grid-template-columns:1fr 1fr;}
-.f3{grid-template-columns:1fr 1fr 1fr;}
-.f4{grid-template-columns:1fr 1fr 1fr 1fr;}
-.f3-1{grid-template-columns:3fr 1fr;}
-
-.field-label{
-  font-size:5.5pt;
-  font-weight:600;
-  color:#555;
-  letter-spacing:2.5px;
-  text-transform:uppercase;
-  margin-bottom:1mm;
-}
-
-.field-value{
-  font-size:8.2pt;
-  font-weight:400;
-  color:#ccc;
-  line-height:1.5;
-}
-
-.field-value.white{color:#fff;font-weight:500;}
-
-/* Dos bloques lado a lado */
-.two-col{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0 6mm;
-}
-
-/* ─── TABLA REFACCIONES ─── */
-.refac{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0 6mm;
-}
-
-.refac-col{}
-
-.refac-table{
-  width:100%;
-  border-collapse:collapse;
-}
-
-.refac-table tr.thead td{
-  font-size:5.5pt;
-  font-weight:700;
-  color:#555;
-  letter-spacing:2.5px;
-  text-transform:uppercase;
-  padding:0 1mm 1.5mm;
-  border-bottom:0.3mm solid #2a2a2a;
-}
-
-.refac-table tr.tbody td{
-  font-size:7.5pt;
-  color:#bbb;
-  padding:1.2mm 1mm;
-  border-bottom:0.2mm solid #1f1f1f;
-  vertical-align:top;
-}
-
-.refac-table tr.tbody td:first-child{
-  color:#666;
-  width:7mm;
-}
-
-.refac-table tr.tbody td:nth-child(2){
-  color:#888;
-  width:20mm;
-  font-size:7pt;
-}
-
-/* ─── ESTADO FINAL ─── */
-.estado-row{
-  display:flex;
-  align-items:center;
-  gap:3mm;
-  padding:2.5mm 0;
-  border-top:0.3mm solid #222;
-  border-bottom:0.3mm solid #222;
-}
-
-.estado-check{
-  font-size:10pt;
-  color:#4ade80;
-  font-weight:700;
-}
-
-.estado-text{
-  font-size:9pt;
-  font-weight:700;
-  color:#fff;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-/* ─── FIRMAS ─── */
-.firmas{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0 8mm;
-  margin-top:1mm;
-}
-
-.firma{
-  border-top:0.3mm solid #333;
-  padding-top:1.5mm;
-}
-
-.firma-name{
-  font-size:8pt;
-  font-weight:600;
-  color:#ccc;
-}
-
-.firma-role{
-  font-size:6.5pt;
-  color:#555;
-  margin-top:0.5mm;
-}
-
-/* ─── FOOTER ─── */
-.footer{
-  background:#0a0a0a;
-  border-top:0.3mm solid #222;
-  padding:2.5mm 9mm;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.footer-left{
-  font-size:6.5pt;
-  color:#444;
-}
-
-.footer-right{
-  font-size:6.5pt;
-  color:#444;
-  letter-spacing:1px;
-}
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    body {background-color: #0e0e0e}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 28.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 8.0px 'Helvetica Neue'; color: #434343; -webkit-text-stroke: #434343}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: right; font: 7.3px 'Helvetica Neue'; color: #434343; -webkit-text-stroke: #434343}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: right; font: 21.3px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: right; font: 11.3px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 7.3px 'Helvetica Neue'; color: #434343; -webkit-text-stroke: #434343}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.7px 'Helvetica Neue'; color: #d5d5d5; -webkit-text-stroke: #d5d5d5}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.9px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.9px 'Helvetica Neue'; color: #c1c1c1; -webkit-text-stroke: #c1c1c1}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.3px 'Helvetica Neue'; color: #41db6d; -webkit-text-stroke: #41db6d}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.7px 'Helvetica Neue'; color: #c1c1c1; -webkit-text-stroke: #c1c1c1}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 8.7px 'Helvetica Neue'; color: #434343; -webkit-text-stroke: #434343}
+    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; font: 8.7px 'Helvetica Neue'; color: #343434; -webkit-text-stroke: #343434}
+    span.s1 {font-kerning: none; background-color: #0e0e0e}
+    span.s2 {font-kerning: none; background-color: #141414}
+    span.s3 {font-kerning: none; background-color: #0a0a0a}
+    table.t1 {border-collapse: collapse}
+    td.td1 {width: 80.0px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: #434343 #434343 #1f1f1f #434343; padding: 0.0px 3.8px 5.7px 3.8px}
+    td.td2 {width: 114.2px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: #434343 #434343 #1f1f1f #434343; padding: 0.0px 3.8px 5.7px 3.8px}
+    td.td3 {width: 157.2px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: #434343 #434343 #1f1f1f #434343; padding: 0.0px 3.8px 5.7px 3.8px}
+    td.td4 {width: 157.3px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: #434343 #434343 #1f1f1f #434343; padding: 0.0px 3.8px 5.7px 3.8px}
+  </style>
 </head>
 <body>
-<div class="page">
-
-<!-- ══ HEADER ══ -->
-<div class="hdr">
-  <div class="hdr-brand">
-    <div class="hdr-logo-row">
-      <div class="logo-placeholder">
-        <!-- LOGO: reemplazar con <img src="data:image/png;base64,..." /> cuando se tenga el logo -->
-        <svg viewBox="0 0 120 36" xmlns="http://www.w3.org/2000/svg" width="120" height="36">
-          <text x="0" y="26" font-family="Inter Tight,sans-serif" font-weight="800" font-size="28" fill="#ffffff" letter-spacing="-0.5">GILIO</text>
-          <text x="72" y="26" font-family="Inter,sans-serif" font-weight="300" font-size="12" fill="#555" letter-spacing="3">MAQUINARIA</text>
-        </svg>
-      </div>
-    </div>
-    <div class="hdr-title">Reporte de Servicio Técnico &nbsp;—&nbsp; Documento generado automáticamente · Uso interno</div>
-  </div>
-
-  <div class="hdr-meta">
-    <div class="meta-block">
-      <span class="meta-label">N° Servicio</span>
-      <span class="meta-value big">#{{SERVICIO_NO}}</span>
-    </div>
-    <div class="meta-block">
-      <span class="meta-label">Fecha</span>
-      <span class="meta-value">{{FECHA}}</span>
-    </div>
-    <div class="meta-block">
-      <span class="meta-label">Técnico</span>
-      <span class="meta-value">{{TECNICO}}</span>
-    </div>
-    <div class="meta-block">
-      <span class="meta-label">Ayudante</span>
-      <span class="meta-value">{{AYUDANTE}}</span>
-    </div>
-  </div>
-</div>
-
-<!-- ══ STRIP ══ -->
-<div class="strip">
-  <div class="strip-item">
-    <span class="strip-label">Tipo de Servicio</span>
-    <span class="strip-value">{{TIPO_SERVICIO}}</span>
-  </div>
-  <div class="strip-item">
-    <span class="strip-label">Tiempo Total</span>
-    <span class="strip-value">{{TIEMPO}} horas</span>
-  </div>
-  <div class="strip-item">
-    <span class="strip-label">Modelo</span>
-    <span class="strip-value">{{MODELO}}</span>
-  </div>
-  <div class="strip-item">
-    <span class="strip-label">N° Serie</span>
-    <span class="strip-value">{{SERIE}}</span>
-  </div>
-  <div class="strip-item">
-    <span class="strip-label">Horómetro</span>
-    <span class="strip-value">{{HOROMETRO}} h</span>
-  </div>
-</div>
-
-<!-- ══ BODY ══ -->
-<div class="body">
-
-  <!-- Cliente -->
-  <div class="sec">
-    <div class="sec-hdr">Identificación del Equipo</div>
-    <div class="fields f1">
-      <div>
-        <div class="field-label">Cliente / Ubicación</div>
-        <div class="field-value white">{{CLIENTE}}</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Diagnóstico -->
-  <div class="sec">
-    <div class="sec-hdr">Diagnóstico Técnico</div>
-    <div class="fields f1" style="gap:2.5mm;">
-      <div>
-        <div class="field-label">Motivo del Servicio</div>
-        <div class="field-value">{{FALLA}}</div>
-      </div>
-      <div class="two-col">
-        <div>
-          <div class="field-label">Síntomas Identificados en Campo</div>
-          <div class="field-value">{{SINTOMAS}}</div>
-        </div>
-        <div>
-          <div class="field-label">Causa / Raíz</div>
-          <div class="field-value">{{CAUSA}}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Trabajo realizado -->
-  <div class="sec">
-    <div class="sec-hdr">Trabajo Realizado</div>
-    <div>
-      <div class="field-label">Solución Implementada</div>
-      <div class="field-value">{{SOLUCION}}</div>
-    </div>
-  </div>
-
-  <!-- Refacciones -->
-  <div class="sec">
-    <div class="sec-hdr">Refacciones Utilizadas</div>
-    <div class="refac">
-      <div class="refac-col">
-        <table class="refac-table">
-          <tr class="thead">
-            <td>Cant.</td><td>N° Parte</td><td>Descripción</td>
-          </tr>
-          {{REFAC_COL1}}
-        </table>
-      </div>
-      <div class="refac-col">
-        <table class="refac-table">
-          <tr class="thead">
-            <td>Cant.</td><td>N° Parte</td><td>Descripción</td>
-          </tr>
-          {{REFAC_COL2}}
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- Herramienta -->
-  <div class="sec">
-    <div class="sec-hdr">Herramienta Especializada</div>
-    <div class="field-value">{{HERRAMIENTA}}</div>
-  </div>
-
-  <!-- Resultado -->
-  <div class="sec">
-    <div class="sec-hdr">Resultado y Seguimiento</div>
-    <div class="estado-row">
-      <span class="estado-check">✓</span>
-      <span class="estado-text">Estado Final: {{ESTADO}}</span>
-    </div>
-    <div class="two-col" style="margin-top:2.5mm;">
-      <div>
-        <div class="field-label">Pruebas Realizadas y Resultados</div>
-        <div class="field-value">{{PRUEBAS}}</div>
-      </div>
-      <div>
-        <div class="field-label">Recomendaciones / Pendientes</div>
-        <div class="field-value">{{RECOMENDACIONES}}</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Lección técnica + evidencia -->
-  <div class="sec">
-    <div class="sec-hdr">Lección Técnica</div>
-    <div class="two-col">
-      <div>
-        <div class="field-label">Observaciones</div>
-        <div class="field-value">{{LECCION}}</div>
-      </div>
-      <div>
-        <div class="field-label">Evidencia Fotográfica</div>
-        <div class="field-value">{{EVIDENCIA}}</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Conformidad -->
-  <div class="sec">
-    <div class="sec-hdr">Conformidad del Servicio</div>
-    <div class="firmas">
-      <div class="firma">
-        <div class="firma-name">{{TECNICO}}</div>
-        <div class="firma-role">Técnico responsable — Gilio Maquinaria</div>
-      </div>
-      <div class="firma">
-        <div class="firma-name">[ Fotografía de firma del cliente ]</div>
-        <div class="firma-role">{{CLIENTE_CORTO}} &nbsp;·&nbsp; Representante del cliente &nbsp;·&nbsp; {{FECHA}}</div>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /body -->
-
-<!-- ══ FOOTER ══ -->
-<div class="footer">
-  <span class="footer-left">Gilio Inversiones Agropecuarias &nbsp;·&nbsp; Servicio Técnico — Maquinaria Manitou &nbsp;·&nbsp; Documento generado automáticamente por el sistema de captura de servicios</span>
-  <span class="footer-right">Folio #{{SERVICIO_NO}} · {{FECHA}}</span>
-</div>
-
-</div>
+<p class="p1"><span class="s1">GILIO</span></p>
+<p class="p2"><span class="s1">MAQUINARIA</span></p>
+<p class="p3"><span class="s1">REPORTE DE SERVICIO TÉCNICO  —  DOCUMENTO GENERADO AUTOMÁTICAMENTE · USO INTERNO</span></p>
+<p class="p4"><span class="s1">N° SERVICIO</span></p>
+<p class="p5"><span class="s1">#{{SERVICIO_NO}}</span></p>
+<p class="p4"><span class="s1">FECHA</span></p>
+<p class="p6"><span class="s1">{{FECHA}}</span></p>
+<p class="p4"><span class="s1">TÉCNICO</span></p>
+<p class="p6"><span class="s1">{{TECNICO}}</span></p>
+<p class="p4"><span class="s1">AYUDANTE</span></p>
+<p class="p6"><span class="s1">{{AYUDANTE}}</span></p>
+<p class="p7"><span class="s2">TIPO DE SERVICIO</span></p>
+<p class="p8"><span class="s2">{{TIPO_SERVICIO}}</span></p>
+<p class="p7"><span class="s2">TIEMPO TOTAL</span></p>
+<p class="p8"><span class="s2">{{TIEMPO}} horas</span></p>
+<p class="p7"><span class="s2">MODELO</span></p>
+<p class="p8"><span class="s2">{{MODELO}}</span></p>
+<p class="p7"><span class="s2">N° SERIE</span></p>
+<p class="p8"><span class="s2">{{SERIE}}</span></p>
+<p class="p7"><span class="s2">HORÓMETRO</span></p>
+<p class="p8"><span class="s2">{{HOROMETRO}}<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s1">IDENTIFICACIÓN DEL EQUIPO</span></p>
+<p class="p7"><span class="s1">CLIENTE / UBICACIÓN</span></p>
+<p class="p9"><span class="s1">{{CLIENTE}}</span></p>
+<p class="p3"><span class="s1">DIAGNÓSTICO TÉCNICO</span></p>
+<p class="p7"><span class="s1">MOTIVO DEL SERVICIO</span></p>
+<p class="p10"><span class="s1">{{FALLA}}</span></p>
+<p class="p7"><span class="s1">SÍNTOMAS IDENTIFICADOS EN CAMPO</span></p>
+<p class="p10"><span class="s1">{{SINTOMAS}}</span></p>
+<p class="p7"><span class="s1">CAUSA / RAÍZ</span></p>
+<p class="p10"><span class="s1">{{CAUSA}}</span></p>
+<p class="p3"><span class="s1">TRABAJO REALIZADO</span></p>
+<p class="p7"><span class="s1">SOLUCIÓN IMPLEMENTADA</span></p>
+<p class="p10"><span class="s1">{{SOLUCION}}</span></p>
+<p class="p3"><span class="s1">REFACCIONES UTILIZADAS</span></p>
+<p class="p9"><span class="s1">{{REFAC_COL1}}</span></p>
+<table cellspacing="0" cellpadding="0" class="t1">
+  <tbody>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p7"><span class="s1">CANT.</span></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p7"><span class="s1">N° PARTE</span></p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p7"><span class="s1">DESCRIPCIÓN</span></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="p9"><span class="s1">{{REFAC_COL2}}</span></p>
+<table cellspacing="0" cellpadding="0" class="t1">
+  <tbody>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p7"><span class="s1">CANT.</span></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p7"><span class="s1">N° PARTE</span></p>
+      </td>
+      <td valign="middle" class="td4">
+        <p class="p7"><span class="s1">DESCRIPCIÓN</span></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="p3"><span class="s1">HERRAMIENTA ESPECIALIZADA</span></p>
+<p class="p10"><span class="s1">{{HERRAMIENTA}}</span></p>
+<p class="p3"><span class="s1">RESULTADO Y SEGUIMIENTO</span></p>
+<p class="p11"><span class="s1">✓</span></p>
+<p class="p2"><span class="s1">ESTADO FINAL: {{ESTADO}}</span></p>
+<p class="p7"><span class="s1">PRUEBAS REALIZADAS Y RESULTADOS</span></p>
+<p class="p10"><span class="s1">{{PRUEBAS}}</span></p>
+<p class="p7"><span class="s1">RECOMENDACIONES / PENDIENTES</span></p>
+<p class="p10"><span class="s1">{{RECOMENDACIONES}}</span></p>
+<p class="p3"><span class="s1">LECCIÓN TÉCNICA</span></p>
+<p class="p7"><span class="s1">OBSERVACIONES</span></p>
+<p class="p10"><span class="s1">{{LECCION}}</span></p>
+<p class="p7"><span class="s1">EVIDENCIA FOTOGRÁFICA</span></p>
+<p class="p10"><span class="s1">{{EVIDENCIA}}</span></p>
+<p class="p3"><span class="s1">CONFORMIDAD DEL SERVICIO</span></p>
+<p class="p12"><span class="s1">{{TECNICO}}</span></p>
+<p class="p13"><span class="s1">Técnico responsable — Gilio Maquinaria</span></p>
+<p class="p12"><span class="s1">[ Fotografía de firma del cliente ]</span></p>
+<p class="p13"><span class="s1">{{CLIENTE_CORTO}}  ·  Representante del cliente  ·  {{FECHA}}</span></p>
+<p class="p14"><span class="s3">Gilio Inversiones Agropecuarias  ·  Servicio Técnico — Maquinaria Manitou  ·  Documento generado automáticamente por el sistema de captura de servicios</span></p>
+<p class="p14"><span class="s3">Folio #{{SERVICIO_NO}} · {{FECHA}}</span></p>
 </body>
 </html>
